@@ -1,14 +1,17 @@
+import { ICacheEngine } from './ICacheEngine';
+
 import {Redis, RedisAPI} from "@vertx/redis-client";
 
 import { CoreUtils } from 'es4x-utils/src/utils/CoreUtils';
 import { LogUtils } from 'es4x-utils/src/utils/LogUtils';
-import { ObjUtils } from 'es4x-utils/src/utils/ObjUtils';
 import { StringUtils } from 'es4x-utils/src/utils/StringUtils';
 
-class	RedisCache
+class	RedisCache	extends	ICacheEngine
 {
 	constructor(_vertx, _host)
 	{
+		super();
+		
 		this.__redisClient = Redis.createClient(_vertx, _host);
 		this.__redis = null;
 	}

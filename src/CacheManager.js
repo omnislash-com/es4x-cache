@@ -8,7 +8,12 @@ class	CacheManager
 {
 	constructor(_cache)
 	{
-		this.__cache = _cache;
+		this.setEngine(_cache);
+	}
+
+	setEngine(_cacheEngine)
+	{
+		this.__cache = _cacheEngine;
 	}
 
 	async	del(_category, _key)
