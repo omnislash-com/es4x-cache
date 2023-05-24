@@ -18,12 +18,8 @@ suite.test("Redis.Connection", async function (context) {
 	{
 		// create the cache and connect
 		let	category = ObjUtils.GetValueToString(config, "redis.category_name");
-		let	cache = await CacheManager.Create(vertx, {
-			"redis": {
-				"activated": true,
-				"url": ObjUtils.GetValueToString(config, "redis.url")
-			}
-		});
+		let	hostUrl = ObjUtils.GetValueToString(config, "redis.url");
+		let	cache = await CacheManager.Create(vertx, hostUrl);
 
 		// connect
 		if (cache == null)

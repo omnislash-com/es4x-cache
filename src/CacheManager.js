@@ -104,23 +104,10 @@ class	CacheManager
 
 
 
-	static	async	Create(_vertx, _config)
+	static	async	Create(_vertx, _hostUrl)
 	{
-		// is it activated?
-		let	isActivated = ObjUtils.GetValueToBool(_config, "redis.activated");
-		if (isActivated == false)
-			return null;
-		
-		// get the url
-		let	redisUrl = ObjUtils.GetValue(_config, "redis.url", "");
-		if (StringUtils.IsEmpty(redisUrl) == true)
-		{
-			LogUtils.LogError("REDIS: error url is empty");
-			return null;
-		}
-
 		// create the new Redis cache
-		let	redisCache = new RedisCache(_vertx, redisUrl);
+		let	redisCache = new RedisCache(_vertx, _hostUrl);
 
 		// connect
 		let	redisOk = await redisCache.connect();
