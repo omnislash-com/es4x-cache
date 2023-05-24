@@ -1,0 +1,6 @@
+{
+	"redis": {
+		"url": "redis://:key@ip:port/1",
+		"category_name": "test"
+	}
+}
