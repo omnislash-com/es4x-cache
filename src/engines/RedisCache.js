@@ -101,7 +101,7 @@ class	RedisCache
 			let	response = retGet.get(i);
 
 			// get the value
-			let	finalValue = this.getValueFromResponse(response);
+			let	finalValue = RedisCache.GetValueFromResponse(response);
 
 			// nothing?
 			if (finalValue == null)
@@ -111,18 +111,6 @@ class	RedisCache
 		}
 
 		return ret;
-	}
-
-	getValueFromResponse(_response, _default = null)
-	{
-		if (_response == null)
-			return _default;
-		
-		// get the value
-		let	value = _response.toString();
-
-		// convert it
-		return StringUtils.ToAny(value, true);			
 	}
 
 	async	set(_key, _val, _expirationSec = 0)
@@ -158,7 +146,7 @@ class	RedisCache
 		let	ret = await this.__redis.get(_key);
 
 		// return it
-		return this.getValueFromResponse(ret, _default);
+		return RedisCache.GetValueFromResponse(ret, _default);
 	}
 
 	async	delete(_key)
@@ -169,6 +157,18 @@ class	RedisCache
 		let	ret = this.__redis.del([_key]);
 
 		return ret != null;
+	}
+
+	static	GetValueFromResponse(_response, _default = null)
+	{
+		if (_response == null)
+			return _default;
+		
+		// get the value
+		let	value = _response.toString();
+
+		// convert it
+		return StringUtils.ToAny(value, true);			
 	}
 }
 
